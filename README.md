@@ -6,6 +6,10 @@
 
 This Wordpress plugin provides the SEO and Routing functionality for a Styla magazine.
 
+Releases
+
+* v1.0.7 Integrated SEO API
+
 ### Plugin Install
 
 1. Copy everything except the README.md to the Wordpress folder
