@@ -75,33 +75,17 @@ class Styla_Magazine_Helper {
     private static function fetchAndRememberSEO( $key ) {
         //die(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
         $data = @file_get_contents(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
-
         if($data != FALSE){
-			// JSON decode
+            // JSON decode
             $json = json_decode($data);
-
-            // Check if json has status code
-			if(!isset($json->status)){
-	        	die('Styla Plugin: No status code in SEO response.');
-            }
-
             // check if response code is 2XX
-        	if(substr((string)$json->status, 0, 1) == '2'){
-            	// if no expire is present, default to 60min
-            	$expire = isset($json->expire) ? $json->expire / 60 : 60;
-
-            	// TODO: Save JSON to Cache with $expire
-				// ...
-
-				// Return the JSON
-				return $json;
-			}
-			else{
-	            die('Styla Plugin: Status code is not 2XX: '.$json->status);
+            if(substr((string)$json->status, 0, 1) == '2'){
+                // if no expire is present, default to 60min
+                $expire = isset($json->expire) ? $json->expire / 60 : 60;
+                // TODO: Save JSON to Cache with $expire
+                // Return the JSON
+                return $json;
             }
-        }
-        else{
-	        die('Styla Plugin: No data received from SEO API.');
         }
     }
 
