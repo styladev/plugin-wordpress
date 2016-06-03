@@ -1,13 +1,14 @@
-## Wordpress Styla Magazine Plugin v.1.0.6
+## Wordpress Styla Magazine Plugin v.1.0.8
 ## Installation How-to
-#### Author: Sebastian Sachtleben
-#### Last updated: 14.07.2015
+#### Author: Sebastian Sachtleben, Christian Korndörfer
+#### Last updated: 03.06.2016
 #### Compatibility: Wordpress 4.11 - 4.22
 
 This Wordpress plugin provides the SEO and Routing functionality for a Styla magazine.
 
 Releases
 
+* v1.0.8 now using CDN integration
 * v1.0.7 Integrated SEO API
 
 ### Plugin Install

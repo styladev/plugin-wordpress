@@ -10,12 +10,11 @@ class Styla_Magazine_Helper {
     /**
      * Fetch the magazine content for the styla plugin.
      */
-    public static function fetch_content( $host ) {
+    public static function fetch_seo_content() {
         if (!self::isMagazinePath()) {
             return array();
         }
 
-        // TODO: Fetch current script and style version from version endpoint
         parse_str($_SERVER['QUERY_STRING'], $queryParams);
         $currentPath = self::getRequestPath($queryParams);
         // $pathing = explode("/", $currentPath);
@@ -24,19 +23,6 @@ class Styla_Magazine_Helper {
             $currentPath = str_replace('/'.$magazinePath, '', $currentPath);
         }
 
-        /*
-        $currentPath = (($pathing[1] == "" || $pathing[1] == "tag") ? "/user/" . get_option('styla_username') : "") . $currentPath;
-        if ($currentPath === null || (
-                strrpos($currentPath, '/user/') === 0 &&
-                strrpos($currentPath, '/tag/') === 0 &&
-                strrpos($currentPath, '/story/') === 0 &&
-                strrpos($currentPath, '/search/') === 0)) {
-            return array();
-        }
-        if ($queryParams['offset']) {
-            $currentPath = $currentPath . "?offset=" . $queryParams['offset'];
-        }
-        */
         $cacheKey = self::getCacheName($currentPath);
         $seo = wp_cache_get($cacheKey, 'StylaMagazine');
         if (!$seo) {
@@ -49,6 +35,16 @@ class Styla_Magazine_Helper {
 
             return $seo;
     	}
+    }
+
+    /**
+     * Fetch the magazine content for the styla plugin.
+     */
+    public static function fetch_cdn_content() {
+        $version = self::fetchAndRememberCdnVersion();
+        $cdn = '<script async type="text/javascript" src="' . get_option('styla_content_server', 'http://cdn.styla.com/') . 'scripts/clients/' . get_option('styla_username') . '.js?v=' . $version . '"></script>' .
+               '<link rel="stylesheet" type="text/css" href="' . get_option('styla_content_server', 'http://cdn.styla.com/') . 'styles/clients/' . get_option('styla_username') . '.css?v=' . $version . '">';
+        return $cdn;
     }
 
     /**
@@ -73,7 +69,6 @@ class Styla_Magazine_Helper {
      * Fetch SEO information for the requested key
      */
     private static function fetchAndRememberSEO( $key ) {
-        //die(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
         $data = @file_get_contents(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
         if($data != FALSE){
             // JSON decode
@@ -87,6 +82,17 @@ class Styla_Magazine_Helper {
                 return $json;
             }
         }
+    }
+
+    /**
+     * Fetch SEO information for the requested key
+     */
+    private static function fetchAndRememberCdnVersion( $key ) {
+        $version = @file_get_contents(get_option('styla_version_server', 'http://live.styla.com/api/version/').get_option('styla_username', ''));
+        if($version != FALSE){
+            return $version;
+        }
+        return "";
     }
 
     /**

@@ -45,8 +45,9 @@ class Styla_Magazine_Public {
      * into the head and body variable.
      */
     public function fetch_magazine_content() {
-        $seo = Styla_Magazine_Helper::fetch_content( get_option('styla_content_server', 'http://live.styla.com') );
-        $this->head = $seo->head;
+        $seo = Styla_Magazine_Helper::fetch_seo_content( get_option('styla_content_server', 'http://live.styla.com') );
+        $cdn = Styla_Magazine_Helper::fetch_cdn_content( get_option('styla_version_server', 'http://live.styla.com/api/version/') );
+        $this->head = $seo->head.$cdn;
         $this->body = $seo->body;
     }
 
@@ -69,7 +70,7 @@ class Styla_Magazine_Public {
             die('Please set the styla magazine username in the settings!');
         }
         if ($this->body !== null) {
-            echo '<script id="amazineEmbed" type="text/javascript" src="' . get_option('styla_content_server', 'http://live.styla.com') . '/scripts/preloader/' . $styla_username . '.js" async></script>';
+            echo '<div id="stylaMagazine"</div>';
             echo $this->body;
         }
     }
