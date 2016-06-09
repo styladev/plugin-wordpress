@@ -15,24 +15,26 @@ class Styla_Magazine_Helper {
             return array();
         }
 
-        parse_str($_SERVER['QUERY_STRING'], $queryParams);
-        $currentPath = self::getRequestPath($queryParams);
-        // $pathing = explode("/", $currentPath);
+        $currentPath = $_SERVER["REQUEST_URI"];
         $magazinePath = get_option('styla_magazine_path', '/');
         if ($magazinePath != '/') {
             $currentPath = str_replace('/'.$magazinePath, '', $currentPath);
         }
 
-        $cacheKey = self::getCacheName($currentPath);
-        $seo = wp_cache_get($cacheKey, 'StylaMagazine');
+        $seo = wp_cache_get($currentPath, 'StylaMagazine');
         if (!$seo) {
             $seo = self::fetchAndRememberSEO($currentPath);
         }
 
         if(is_object( $seo )){
-            $seo->head = isset($seo->html->head) ? $seo->html->head : "";
-            $seo->body = isset($seo->html->body) ? $seo->html->body : "";
+            // Remove <title> from $seo->html->head because it's already set by add_magazine_title()
+            if(isset($seo->html->head)) {
+                $seo->html->head = preg_replace("/<title>.*<\/title>/", "", $seo->html->head);
+                $seo->head = $seo->html->head;
+            }
 
+            $seo->body = isset($seo->html->body) ? $seo->html->body : "";
+            $seo->tags = isset($seo->tags) ? $seo->tags : [];
             return $seo;
     	}
     }
@@ -77,7 +79,8 @@ class Styla_Magazine_Helper {
             if(substr((string)$json->status, 0, 1) == '2'){
                 // if no expire is present, default to 60min
                 $expire = isset($json->expire) ? $json->expire / 60 : 60;
-                // TODO: Save JSON to Cache with $expire
+                // Save JSON to Cache with $expire
+                wp_cache_set($key, $json, 'StylaMagazine', $expire);
                 // Return the JSON
                 return $json;
             }
@@ -87,7 +90,7 @@ class Styla_Magazine_Helper {
     /**
      * Fetch SEO information for the requested key
      */
-    private static function fetchAndRememberCdnVersion( $key ) {
+    private static function fetchAndRememberCdnVersion() {
         $version = @file_get_contents(get_option('styla_version_server', 'http://live.styla.com/api/version/').get_option('styla_username', ''));
         if($version != FALSE){
             return $version;
@@ -108,7 +111,7 @@ class Styla_Magazine_Helper {
     /**
      * Checks if the current path is the magazin path.
      */
-    private static function isMagazinePath() {
+    public static function isMagazinePath() {
         $magazinePath = get_option('styla_magazine_path', '/');
         if (strlen($magazinePath) == 0 || $magazinePath[0] != '/') {
             $magazinePath = '/' . $magazinePath;
@@ -118,17 +121,6 @@ class Styla_Magazine_Helper {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Generates a unique cache name from the url.
-     */
-    public static function getCacheName( $url ) {
-        $cacheKey = preg_replace('/[^A-Za-z0-9]/', "", $url);
-        if (!$cacheKey) {
-            $cacheKey = 'root';
-        }
-        return $cacheKey;
     }
 
 }

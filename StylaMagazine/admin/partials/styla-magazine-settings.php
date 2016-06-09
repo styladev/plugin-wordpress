@@ -12,15 +12,35 @@
             } else {
                 delete_option('styla_username');
             }
+
             if ($_POST['styla_magazine_path'] != '') {
                 update_option('styla_magazine_path', $_POST['styla_magazine_path']);
             } else {
                 delete_option('styla_magazine_path');
             }
+
+            if ($_POST['styla_magazine_page_slug'] != '') {
+                update_option('styla_magazine_page_slug', $_POST['styla_magazine_page_slug']);
+            } else {
+                delete_option('styla_magazine_page_slug');
+            }
+
+            if ($_POST['styla_seo_server'] != '') {
+                update_option('styla_seo_server', $_POST['styla_seo_server']);
+            } else {
+                delete_option('styla_seo_server');
+            }
+
             if ($_POST['styla_content_server'] != '') {
                 update_option('styla_content_server', $_POST['styla_content_server']);
             } else {
                 delete_option('styla_content_server');
+            }
+
+            if ($_POST['styla_version_server'] != '') {
+                update_option('styla_version_server', $_POST['styla_version_server']);
+            } else {
+                delete_option('styla_version_server');
             }
     ?>
             <div class="updated"><p><strong><?php _e('Options saved.' ); ?></strong></p></div>
@@ -34,14 +54,21 @@
                 <th scope="row"><?php _e("Domain" ); ?></th>
                 <td>
                     <input type="text" name="styla_username" value="<?php echo get_option('styla_username'); ?>" class="regular-text">
-                    <p class="description">Domain of the magazine (e.g. "ludwigbeck")</p>
+                    <p class="description">Domain name of the magazine (provided by Styla)</p>
                 </td>
             </tr>
             <tr>
                 <th scope="row"><?php _e("Magazine Root Path" ); ?></th>
                 <td>
                     <input type="text" name="styla_magazine_path" value="<?php echo get_option('styla_magazine_path'); ?>" class="regular-text">
-                    <p class="description">The magazine root path (default: "")</p>
+                    <p class="description">The magazine root path (e.g. "magazine" for example.com/magazine ; leave empty if the magazine is on your front page; default: "")</p>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row"><?php _e("Magazine Page Slug" ); ?></th>
+                <td>
+                    <input type="text" name="styla_magazine_page_slug" value="<?php echo get_option('styla_magazine_page_slug'); ?>" class="regular-text">
+                    <p class="description">Slug of the magazine page. Only required if magazine is shown on the front page (default: "")</p>
                 </td>
             </tr>
             <tr>
@@ -65,14 +92,7 @@
                     <p class="description">Server address that delivers the current magazine script and styles version number (default: "http://live.styla.com/api/version/")</p>
                 </td>
             </tr>
-            <tr>
-                <th scope="row"><?php _e("Enable Caching" ); ?></th>
-                <td>
-                    <input type="checkbox" name="styla_caching_enabled" value="<?php echo get_option('styla_caching_enabled'); ?>">
-                    <p class="description">Enable caching of SEO and version information (default: enabled)</p>
-                </td>
-            </tr>
         </table>
-        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="&Auml;nderungen &uuml;bernehmen"></p>
+        <p class="submit"><input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes"></p>
     </form>
 </div>

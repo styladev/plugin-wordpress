@@ -49,8 +49,8 @@ class Styla_Magazine_Manager {
      */
     public function __construct() {
         $this->plugin_slug = 'styla-magazine-slug';
-        $this->version = '1.0.8';
- 
+        $this->version = '1.1.0';
+
         $this->load_dependencies();
         $this->define_admin_hooks();
         $this->define_public_hooks();
@@ -101,7 +101,20 @@ class Styla_Magazine_Manager {
      */
     private function define_public_hooks() {
         $public = new Styla_Magazine_Public( $this->get_version() );
+
+        // Replace <title> tag with fetched SEO info
+        $wp_version = get_bloginfo('version');
+        if($wp_version >= 4.4) {
+            $this->loader->add_filter( 'pre_get_document_title', $public, 'add_magazine_title');
+        }
+        else {
+            $this->loader->add_filter( 'wp_title', $public, 'add_magazine_title');
+        }
+
+        // Add scripts and other SEO information to <head>
         $this->loader->add_action( 'wp_head', $public, 'add_magazine_head' );
+
+        // Add <noscript> SEO info to <body>
         $this->loader->add_action( 'styla_body', $public, 'add_magazine_body' );
     }
 
@@ -124,5 +137,4 @@ class Styla_Magazine_Manager {
     public function get_version() {
         return $this->version;
     }
-
 }

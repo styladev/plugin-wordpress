@@ -49,15 +49,39 @@ class Styla_Magazine_Public {
         $cdn = Styla_Magazine_Helper::fetch_cdn_content( get_option('styla_version_server', 'http://live.styla.com/api/version/') );
         $this->head = $seo->head.$cdn;
         $this->body = $seo->body;
+        $this->tags = $seo->tags;
+    }
+
+    /**
+     * Replaces the magazine <title> tag
+     */
+    public function add_magazine_title() {
+        if(Styla_Magazine_Helper::isMagazinePath()) {
+            $this->fetch_magazine_content();
+
+            if (isset($this->tags) && is_array($this->tags)) {
+                foreach ($this->tags as &$tag) {
+                    if(isset($tag->tag) && $tag->tag == "title"){
+                        return isset($tag->content) ? $tag->content : "Magazine";
+                    }
+                }
+            }
+
+            return "Magazine";
+        }
+
+        return "Magazine";
     }
 
     /**
      * Renders the magazine head part into the Wordpress head.
      */
     public function add_magazine_head() {
-        $this->fetch_magazine_content();
-        if ($this->head !== null) {
-            echo $this->head;
+        if(Styla_Magazine_Helper::isMagazinePath()){
+            $this->fetch_magazine_content();
+            if ($this->head !== null) {
+                echo $this->head;
+            }
         }
     }
 
@@ -65,13 +89,15 @@ class Styla_Magazine_Public {
      * Renders the magazine head part into the Wordpress body.
      */
     public function add_magazine_body() {
-        $styla_username = get_option('styla_username');
-        if (!$styla_username) {
-            die('Please set the styla magazine username in the settings!');
-        }
-        if ($this->body !== null) {
-            echo '<div id="stylaMagazine"</div>';
-            echo $this->body;
+        if(Styla_Magazine_Helper::isMagazinePath()){
+            $styla_username = get_option('styla_username');
+            if (!$styla_username) {
+                die('Please set the styla magazine username in the settings!');
+            }
+            if ($this->body !== null) {
+                echo '<div id="stylaMagazine"></div>';
+                echo $this->body;
+            }
         }
     }
 
