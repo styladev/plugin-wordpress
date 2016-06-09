@@ -10,7 +10,7 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 
 1. Install and activate the following plugin to allow php in pages: https://wordpress.org/plugins/allow-php-in-posts-and-pages/
 
-2. Copy the StylaMagazine folder into the wp-content/plugins
+2. Copy the entire StylaMagazine folder into your wp-content/plugins folder
 
 3. Activate the StylaMagazine plugin in Wordpress
 
@@ -24,7 +24,7 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 
 * **Domain** - Domain name of the magazine to embed and provided by Styla. If unclear please contact support@styla.com
 * **Magazine Root Path** - URL path to your magazine. Example: The rooth path for mydomain.com/magazine would be "magazine". Leave empty if your magazine is supposed to be displayed on your front page (e.g. mydomain.com/)
-* **Magazine Page Slug** - Slug of the page with the `[php] styla_body(); [/php]` snippet on it. Only required when the Magazine Root Path is empty. The page slug can be found in the "Quick Edit" form of the page:
+* **Magazine Page Slug** - Slug of the (front-)page with the `[php] styla_body(); [/php]` snippet on it. Only required when the Magazine Root Path is empty. The page slug can be found in the "Quick Edit" form of the page, see this example:
 
 ![Page slug in "Quick Edit" form](http://i.imgur.com/vAdGxqk.png)
 
