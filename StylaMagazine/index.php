@@ -13,6 +13,7 @@ if (!defined('WPINC')) {
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/styla-magazine-manager.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/styla-magazine-helper.php';
+include_once(ABSPATH.'wp-admin/includes/plugin.php');
 
 // If rootPath of the magazine is "/" the canonical redirect for the frontpage needs to be disabled
 function disable_canonical_redirect_for_front_page( $redirect ) {
@@ -27,7 +28,15 @@ function disable_canonical_redirect_for_front_page( $redirect ) {
 function run_styla_magazine_manager() {
     // Rewriterules for magazine URLs
     if(get_option('styla_magazine_path') != "") {
-        add_rewrite_rule(get_option('styla_magazine_path').'\/(user|tag|story|search)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+        /* - if WPML Multilingual CMS is installed, the rewriterule should trigger without the language (e.g. /de/...) in front
+         * - the "styla_magazine_page_slug" should be the slug of the page without any path in front
+         */
+        if(is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' )) {
+            add_rewrite_rule('^'.get_option('styla_magazine_page_slug').'\/(user|tag|story|search)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+        }
+        else{
+            add_rewrite_rule(get_option('styla_magazine_path').'\/(user|tag|story|search)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+        }
     }
     else{
         add_rewrite_rule('^(user|tag|story|search)\/(.*)','index.php?pagename='.get_option('styla_magazine_page_slug'),'top');
