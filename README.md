@@ -34,6 +34,16 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 
 ### Changes
 
+#### 1.1.2
+* replace magazine title only on magazine pages
+
+---
+
+#### 1.1.1
+* updated the plugin to work with WPML Multilingual CMS
+
+---
+
 #### 1.1.0
 * using wordpress redirects instead of .htaccess redirects
 * removed duplicates SEO attributes in <head>

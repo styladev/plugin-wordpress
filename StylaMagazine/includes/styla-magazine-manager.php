@@ -49,7 +49,7 @@ class Styla_Magazine_Manager {
      */
     public function __construct() {
         $this->plugin_slug = 'styla-magazine-slug';
-        $this->version = '1.1.0';
+        $this->version = '1.1.2';
 
         $this->load_dependencies();
         $this->define_admin_hooks();
@@ -100,22 +100,24 @@ class Styla_Magazine_Manager {
      * @access	private
      */
     private function define_public_hooks() {
-        $public = new Styla_Magazine_Public( $this->get_version() );
+        $smh = new Styla_Magazine_Helper();
+        if ($smh->isMagazinePath()) {
+            $public = new Styla_Magazine_Public($this->get_version());
 
-        // Replace <title> tag with fetched SEO info
-        $wp_version = get_bloginfo('version');
-        if($wp_version >= 4.4) {
-            $this->loader->add_filter( 'pre_get_document_title', $public, 'add_magazine_title');
+            // Replace <title> tag with fetched SEO info
+            $wp_version = get_bloginfo('version');
+            if ($wp_version >= 4.4) {
+                $this->loader->add_filter('pre_get_document_title', $public, 'add_magazine_title');
+            } else {
+                $this->loader->add_filter('wp_title', $public, 'add_magazine_title');
+            }
+
+            // Add scripts and other SEO information to <head>
+            $this->loader->add_action('wp_head', $public, 'add_magazine_head');
+
+            // Add <noscript> SEO info to <body>
+            $this->loader->add_action('styla_body', $public, 'add_magazine_body');
         }
-        else {
-            $this->loader->add_filter( 'wp_title', $public, 'add_magazine_title');
-        }
-
-        // Add scripts and other SEO information to <head>
-        $this->loader->add_action( 'wp_head', $public, 'add_magazine_head' );
-
-        // Add <noscript> SEO info to <body>
-        $this->loader->add_action( 'styla_body', $public, 'add_magazine_body' );
     }
 
     /**
