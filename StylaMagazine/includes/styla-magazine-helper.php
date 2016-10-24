@@ -7,18 +7,6 @@
 */
 class Styla_Magazine_Helper {
 
-    public function __construct() {
-        $this->load_dependencies();
-    }
-
-    private function load_dependencies() {
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/styla-magazine-admin.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/styla-magazine-public.php';
-        require_once plugin_dir_path( __FILE__ ) . 'styla-magazine-helper.php';
-        require_once plugin_dir_path( __FILE__ ) . 'styla-magazine-loader.php';
-        $loader = new Styla_Magazine_Loader();
-    }
-
     /**
      * Fetch the magazine content for the styla plugin.
      */

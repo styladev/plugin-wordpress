@@ -74,7 +74,7 @@
             <tr>
                 <th scope="row"><?php _e("SEO Server" ); ?></th>
                 <td>
-                    <input type="text" name="styla_seo_server" value="<?php echo get_option('styla_seo_server'); ?>" class="regular-text" placeholder="http://seo.styla.com/">
+                    <input type="text" name="styla_seo_server" value="<?php echo get_option('styla_seo_server'); ?>" class="regular-text" placeholder="http://seo.styla.com/clients/">
                     <p class="description">Server address that delivers SEO information for the magazine (default: "http://seo.styla.com/clients/")</p>
                 </td>
             </tr>
