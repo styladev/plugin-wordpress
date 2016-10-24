@@ -84,6 +84,13 @@ class Styla_Magazine_Helper {
                 // Return the JSON
                 return $json;
             }
+            else {
+                // return Status code 404
+                status_header(404);
+                nocache_headers();
+                include( get_query_template( '404' ) );
+                exit();
+            }
         }
     }
 

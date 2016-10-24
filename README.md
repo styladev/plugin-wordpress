@@ -1,7 +1,7 @@
-## Wordpress Styla Magazine Plugin v1.1.0
+## Wordpress Styla Magazine Plugin v1.2.0
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
-#### Last updated: 09.06.2016
+#### Last updated: 24.10.2016
 #### Compatibility: Wordpress 4.2.2 - 4.5.X
 
 This Wordpress plugin provides the SEO and Routing functionality for a Styla magazine.
@@ -33,6 +33,12 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 * **Version Server** - Server providing the current Version for the magazines Styles and Scripts. _Should not be changed without double-checking with Styla._
 
 ### Changes
+
+#### 1.2.0
+* Accepts pagination offset parameter
+* 404 status header and page on non existent offsets/pages
+
+---
 
 #### 1.1.2
 * replace magazine title only on magazine pages
