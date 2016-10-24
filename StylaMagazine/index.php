@@ -46,7 +46,7 @@ function run_styla_magazine_manager() {
     // Remove canonical when current URL is a magazine URLs
     $smh = new Styla_Magazine_Helper();
 
-    // fetch seo content
+    // fetch seo content early to determine whether or not to show 404
     $smh->fetch_seo_content();
 
     if($smh->isMagazinePath()) {
