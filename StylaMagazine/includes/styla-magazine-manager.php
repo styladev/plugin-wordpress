@@ -49,7 +49,7 @@ class Styla_Magazine_Manager {
      */
     public function __construct() {
         $this->plugin_slug = 'styla-magazine-slug';
-        $this->version = '1.1.2';
+        $this->version = '1.2.0';
 
         $this->load_dependencies();
         $this->define_admin_hooks();
@@ -103,6 +103,9 @@ class Styla_Magazine_Manager {
         $smh = new Styla_Magazine_Helper();
         if ($smh->isMagazinePath()) {
             $public = new Styla_Magazine_Public($this->get_version());
+
+            // Redirect to 404 if SEO API returns 404
+            $this->loader->add_action('force_404_action', $public, 'force_404');
 
             // Replace <title> tag with fetched SEO info
             $wp_version = get_bloginfo('version');
