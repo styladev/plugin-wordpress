@@ -20,6 +20,8 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 
 6. Go to **Settings -> Permalinks** and hit the "Save Changes" button (you don't need to change anything on this site) - this will refresh internal redirects for all magazine urls (e.g. <magazine path>/story/asdf-1234)
 
+### Please do not create any subpages in your CMS or directories for your magazine. The plugin itself will take care of setting up the /magazine/ (or any other) page on which the magazine will appear and of the roouting as well. 
+
 ### Configuration
 
 * **Domain** - Domain name of the magazine to embed and provided by Styla. If unclear please contact support@styla.com
