@@ -49,7 +49,7 @@ class Styla_Magazine_Manager {
      */
     public function __construct() {
         $this->plugin_slug = 'styla-magazine-slug';
-        $this->version = '1.2.0';
+        $this->version = '1.2.1';
 
         $this->load_dependencies();
         $this->define_admin_hooks();

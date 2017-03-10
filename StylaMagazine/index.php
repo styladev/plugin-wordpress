@@ -3,7 +3,7 @@
 Plugin Name: StylaMagazine
 Plugin URI: http://www.styla.com
 Description: The plugin to display the styla magazine. Add "styla_body()" within a php tag in the theme where the magazine should show up. In the Wordpress dashboard is a new Styla Magazine settings page to change the plugin settings.
-Version: 1.2.0
+Version: 1.2.1
 Author: Sebastian Sachtleben, Christian Korndörfer
 Author URI: http://www.styla.com
 */
