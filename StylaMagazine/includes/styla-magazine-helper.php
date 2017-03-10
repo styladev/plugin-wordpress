@@ -7,6 +7,18 @@
 */
 class Styla_Magazine_Helper {
 
+    /*
+     * Helper function to replace file_get_contents()
+     */
+    public static function get_content($URL){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $URL);
+        $data = curl_exec($ch);
+        curl_close($ch);
+        return $data;
+    }
+
     /**
      * Fetch the magazine content for the styla plugin.
      */
@@ -71,7 +83,7 @@ class Styla_Magazine_Helper {
      * Fetch SEO information for the requested key
      */
     private static function fetchAndRememberSEO( $key ) {
-        $data = @file_get_contents(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
+        $data = @self::get_content(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
         if($data != FALSE){
             // JSON decode
             $json = json_decode($data);
@@ -98,7 +110,7 @@ class Styla_Magazine_Helper {
      * Fetch SEO information for the requested key
      */
     private static function fetchAndRememberCdnVersion() {
-        $version = @file_get_contents(get_option('styla_version_server', 'http://live.styla.com/api/version/').get_option('styla_username', ''));
+        $version = @self::get_content(get_option('styla_version_server', 'http://live.styla.com/api/version/').get_option('styla_username', ''));
         if($version != FALSE){
             return $version;
         }
