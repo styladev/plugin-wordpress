@@ -32,6 +32,10 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 * **Content Server** - Server providing Styles and Javascript for the magazine and it's content. _Should not be changed without double-checking with Styla._
 * **Version Server** - Server providing the current Version for the magazines Styles and Scripts. _Should not be changed without double-checking with Styla._
 
+### Using Styla with WPML Plugin
+
+If you use the [WordPress Multilingual Plugin](https://wpml.org/) then please read [this guide](/wpml-plugin.md) to set up Styla magazine(s) on your WordPress website.
+
 ### Changes
 
 #### 1.2.1
