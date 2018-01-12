@@ -1,7 +1,6 @@
-## Wordpress Styla Magazine Plugin v1.2.1
+## Wordpress Styla Magazine Plugin v1.2.2
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
-#### Last updated: 24.10.2016
 #### Compatibility: Wordpress 4.2.2 - 4.5.X
 
 This Wordpress plugin provides the SEO and Routing functionality for a Styla magazine. The first diagram on [this page](https://styladocs.atlassian.net/wiki/spaces/CO/pages/9961481/Technical+Integration) should provide you an overview of what the plugin does and how it exchanges data with Styla.
@@ -37,6 +36,11 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 If you use the [WordPress Multilingual Plugin](https://wpml.org/) then please read [this guide](/wpml-plugin.md) to set up Styla magazine(s) on your WordPress website.
 
 ### Changes
+
+#### 1.2.2
+* using client-scripts.styla.com instead of cdn.styla.com
+
+---
 
 #### 1.2.1
 * now using cURL instead of `file_get_contents()`
