@@ -56,8 +56,8 @@ class Styla_Magazine_Helper {
      */
     public static function fetch_cdn_content() {
         $version = self::fetchAndRememberCdnVersion();
-        $cdn = '<script async type="text/javascript" src="' . get_option('styla_content_server', 'http://cdn.styla.com/') . 'scripts/clients/' . get_option('styla_username') . '.js?v=' . $version . '"></script>' .
-               '<link rel="stylesheet" type="text/css" href="' . get_option('styla_content_server', 'http://cdn.styla.com/') . 'styles/clients/' . get_option('styla_username') . '.css?v=' . $version . '">';
+        $cdn = '<script async type="text/javascript" src="' . get_option('styla_content_server', 'http://client-scripts.styla.com/') . 'scripts/clients/' . get_option('styla_username') . '.js?v=' . $version . '"></script>' .
+               '<link rel="stylesheet" type="text/css" href="' . get_option('styla_content_server', 'http://client-scripts.styla.com/') . 'styles/clients/' . get_option('styla_username') . '.css?v=' . $version . '">';
         return $cdn;
     }
 

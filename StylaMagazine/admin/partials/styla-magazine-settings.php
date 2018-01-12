@@ -81,8 +81,8 @@
             <tr>
                 <th scope="row"><?php _e("Content Server" ); ?></th>
                 <td>
-                    <input type="text" name="styla_content_server" value="<?php echo get_option('styla_content_server'); ?>" class="regular-text" placeholder="http://cdn.styla.com/">
-                    <p class="description">Server address that delivers the magazine script and styles (default: "http://cdn.styla.com/")</p>
+                    <input type="text" name="styla_content_server" value="<?php echo get_option('styla_content_server'); ?>" class="regular-text" placeholder="http://client-scripts.styla.com/">
+                    <p class="description">Server address that delivers the magazine script and styles (default: "http://client-scripts.styla.com/")</p>
                 </td>
             </tr>
             <tr>
