@@ -33,7 +33,9 @@ RUN docker-php-ext-install iconv mcrypt mbstring \
     && docker-php-ext-install curl \
     && docker-php-ext-install intl \
     && docker-php-ext-install pdo \
-    && docker-php-ext-install pdo_mysql
+    && docker-php-ext-install pdo_mysql \
+    && docker-php-ext-install mysqli \
+    && docker-php-ext-enable mysqli
 
 WORKDIR /home/root
 
