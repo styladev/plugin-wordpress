@@ -32,10 +32,10 @@ function run_styla_magazine_manager() {
          * - the "styla_magazine_page_slug" should be the slug of the page without any path in front
          */
         if(is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' )) {
-            add_rewrite_rule('^'.get_option('styla_magazine_page_slug').'\/(user|tag|story|search)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+            add_rewrite_rule('^'.get_option('styla_magazine_page_slug').'\/(user|tag|story|search|category)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
         }
         else{
-            add_rewrite_rule(get_option('styla_magazine_path').'\/(user|tag|story|search)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+            add_rewrite_rule(get_option('styla_magazine_path').'\/(user|tag|story|search|category)\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
         }
     }
     else{
