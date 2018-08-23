@@ -1,4 +1,4 @@
-## Wordpress Styla Magazine Plugin v1.2.2
+## Wordpress Styla Magazine Plugin v1.2.3
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
 #### Compatibility: Wordpress 4.2.2 - 4.5.X
@@ -48,6 +48,11 @@ You can finde more information on the SEO API on [this page](https://styladocs.a
 If you use the [WordPress Multilingual Plugin](https://wpml.org/) then please read [this guide](/wpml-plugin.md) to set up Styla magazine(s) on your WordPress website.
 
 ### Changes
+
+#### 1.2.3
+* added categories path to rewrites
+
+---
 
 #### 1.2.2
 * using client-scripts.styla.com instead of cdn.styla.com
