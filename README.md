@@ -1,4 +1,4 @@
-## Wordpress Styla Magazine Plugin v1.2.3
+## Wordpress Styla Magazine Plugin v1.2.4
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
 #### Compatibility: Wordpress 4.2.2 - 4.5.X
@@ -36,10 +36,10 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 The plugin uses data from Styla's SEO API to:
 * generate tags like: meta tags including `<title>`, canonical link, og:tags, static content inserted into <body>, `robots` instructions
 * insert these tags accordingly into HTML of the template the page with Styla content uses
-  
+
 This is done to provide search engine bots with data to crawl and index all Styal URLs, which are in fact a Single-Page-Application.
 
-Once you install and configure the module, please open source of the page on which your Styla content is embedded and check if none of the tags mentioned below are duplicated. In case `robots`or `link rel="canonical"` or any other are in the HTML twice, make sure to remove the original ones coming from your default template. Otherwise search engine bots might not be able to crawl all the Styla content or crawl it incorrectly. 
+Once you install and configure the module, please open source of the page on which your Styla content is embedded and check if none of the tags mentioned below are duplicated. In case `robots`or `link rel="canonical"` or any other are in the HTML twice, make sure to remove the original ones coming from your default template. Otherwise search engine bots might not be able to crawl all the Styla content or crawl it incorrectly.
 
 You can finde more information on the SEO API on [this page](https://styladocs.atlassian.net/wiki/spaces/CO/pages/9961486/SEO+API+and+Sitemaps+Integration)
 
@@ -48,6 +48,12 @@ You can finde more information on the SEO API on [this page](https://styladocs.a
 If you use the [WordPress Multilingual Plugin](https://wpml.org/) then please read [this guide](/wpml-plugin.md) to set up Styla magazine(s) on your WordPress website.
 
 ### Changes
+
+#### 1.2.4
+* added pages to rewrites
+* support 404 errors with magazine on startpage
+
+---
 
 #### 1.2.3
 * added categories path to rewrites
