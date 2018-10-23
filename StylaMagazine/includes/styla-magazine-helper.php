@@ -83,7 +83,8 @@ class Styla_Magazine_Helper {
      * Fetch SEO information for the requested key
      */
     private static function fetchAndRememberSEO( $key ) {
-        $data = @self::get_content(get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key);
+        $url = get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key;
+        $data = @self::get_content($url);
         if($data != FALSE){
             // JSON decode
             $json = json_decode($data);
@@ -131,15 +132,30 @@ class Styla_Magazine_Helper {
      * Checks if the current path is the magazin path.
      */
     public static function isMagazinePath() {
-        $magazinePath = get_option('styla_magazine_path', '/');
-        if (strlen($magazinePath) == 0 || $magazinePath[0] != '/') {
-            $magazinePath = '/' . $magazinePath;
-        }
-        $currentPath = $_SERVER["REQUEST_URI"];
-        if (strcasecmp(substr($currentPath, 0, strlen($magazinePath)), $magazinePath) !== 0) {
-            return false;
-        }
-        return true;
+        $currentPath = ltrim($_SERVER["REQUEST_URI"], '/');
+        $magazinePath = ltrim(get_option('styla_magazine_path', '/'), '/');
+
+        $routes = join('|', @self::getMagazineRoutes());
+        $rootRegex = '^' . @self::buildRegexForMagazinePath($magazinePath) . '(\/)?$';
+        $routesRegex = '^' . @self::buildRegexForMagazinePath($magazinePath) . '(\/)?(' . $routes . ')\/(.*)';
+
+        $isMatchingRoot = @self::isMatching($rootRegex, $currentPath);
+        $isMatchingRoutes = @self::isMatching($routesRegex, $currentPath);
+
+        return $isMatchingRoot || $isMatchingRoutes;
+    }
+
+    public static function buildRegexForMagazinePath($magazinePath) {
+        return strlen($magazinePath) === 0 ? preg_quote($magazinePath) : ('(' . str_replace('/', '\/', preg_quote($magazinePath)) . ')');
+    }
+
+    public static function isMatching($regex, $string) {
+        preg_match("/" . $regex . "/", $string, $matches);
+        return !empty($matches);
+    }
+
+    public static function getMagazineRoutes() {
+        return [ 'user', 'tag', 'tags', 'story', 'search', 'category', 'pages' ];
     }
 
 }
