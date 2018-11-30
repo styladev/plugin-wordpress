@@ -59,8 +59,10 @@ class Styla_Magazine_Helper {
      */
     public static function fetch_cdn_content() {
         $version = self::fetchAndRememberCdnVersion();
-        $cdn = '<script async type="text/javascript" src="' . @self::getTranslatedOption('styla_content_server', '//client-scripts.styla.com/') . 'scripts/clients/' . get_option('styla_username') . '.js?v=' . $version . '"></script>' .
-               '<link rel="stylesheet" type="text/css" href="' . @self::getTranslatedOption('styla_content_server', '//client-scripts.styla.com/') . 'styles/clients/' . get_option('styla_username') . '.css?v=' . $version . '">';
+        $serverDomain = @self::getTranslatedOption('styla_content_server', '//client-scripts.styla.com/');
+        $stylaUsername = @self::getTranslatedOption('styla_username');
+        $cdn = '<script async type="text/javascript" src="' . $serverDomain . 'scripts/clients/' . $stylaUsername . '.js?v=' . $version . '"></script>' .
+               '<link rel="stylesheet" type="text/css" href="' . $serverDomain . 'styles/clients/' . $stylaUsername . '.css?v=' . $version . '">';
         return $cdn;
     }
 
@@ -171,7 +173,7 @@ class Styla_Magazine_Helper {
         return [ 'user', 'tag', 'tags', 'story', 'search', 'category', 'pages' ];
     }
 
-    public static function getTranslatedOption($key, $defaultValue) {
+    public static function getTranslatedOption($key, $defaultValue = '') {
         return icl_t('StylaMagazine', $key, get_option($key, $defaultValue));
     }
 
