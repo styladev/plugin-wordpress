@@ -27,18 +27,23 @@ class Styla_Magazine_Helper {
             return array();
         }
 
-        $currentPath = $_SERVER["REQUEST_URI"];
+        $path = $_SERVER["REQUEST_URI"];
+        $homeUrl = parse_url(apply_filters('wpml_home_url', get_option('home')), PHP_URL_PATH);
+
+        if (substr($path, 0, strlen($homeUrl)) == $homeUrl) {
+            $path = ltrim(substr($path, strlen($homeUrl)), '/');
+        }
+
         $magazinePath = @self::getTranslatedOption('styla_magazine_path', '/');
         if ($magazinePath != '/') {
-            $currentPath = str_replace('/'.$magazinePath, '', $currentPath);
+            $path = str_replace('/'.$magazinePath, '', $path);
         }
 
         $magazinePath = self::getMagazinePath();
-        die($magazinePath . ' - ' . $currentPath);
 
-        $seo = wp_cache_get($currentPath, 'StylaMagazine');
+        $seo = wp_cache_get($path, 'StylaMagazine');
         if (!$seo) {
-            $seo = self::fetchAndRememberSEO($currentPath);
+            $seo = self::fetchAndRememberSEO($path);
         }
 
         if(is_object( $seo )){
@@ -59,7 +64,7 @@ class Styla_Magazine_Helper {
      */
     public static function fetch_cdn_content() {
         $version = self::fetchAndRememberCdnVersion();
-        $serverDomain = @self::getTranslatedOption('styla_content_server', '//client-scripts.styla.com/');
+        $serverDomain = get_option('styla_content_server', '//client-scripts.styla.com/');
         $stylaUsername = @self::getTranslatedOption('styla_username');
         $cdn = '<script async type="text/javascript" src="' . $serverDomain . 'scripts/clients/' . $stylaUsername . '.js?v=' . $version . '"></script>' .
                '<link rel="stylesheet" type="text/css" href="' . $serverDomain . 'styles/clients/' . $stylaUsername . '.css?v=' . $version . '">';

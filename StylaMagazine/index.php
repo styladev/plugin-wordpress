@@ -46,14 +46,9 @@ function run_styla_magazine_manager() {
         }
     }
     else{
-        $lang = apply_filters( 'wpml_current_language', NULL );
-        $magazinePage = get_page_by_path($pageSlug);
-        $translatedPage = get_page(icl_object_id($magazinePage->ID, 'page', true, $lang));
-        #die(get_option( 'page_on_front' ));
-        #die($translatedPage->post_name);
-        #add_rewrite_rule('en\/','index.php?pagename='.$pageSlug,'top');
-        add_rewrite_rule('^('.$routes.')\/(.*)','index.php?page_id='.get_option( 'page_on_front' ),'top');
-        #add_filter( 'redirect_canonical', 'disable_canonical_redirect_for_front_page' );
+        $frontPageId = get_option( 'page_on_front' );
+        add_rewrite_rule('^('.$routes.')\/(.*)','index.php?page_id='.$frontPageId,'top');
+        add_filter( 'redirect_canonical', 'disable_canonical_redirect_for_front_page' );
     }
 
     // fetch seo content early to determine whether or not to show 404

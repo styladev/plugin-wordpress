@@ -45,7 +45,6 @@
 
             do_action( 'wpml_register_single_string', "StylaMagazine", "styla_username", $_POST['styla_username'] );
             do_action( 'wpml_register_single_string', "StylaMagazine", "styla_magazine_path", $_POST['styla_magazine_path'] );
-            do_action( 'wpml_register_single_string', "StylaMagazine", "styla_magazine_page_slug", $_POST['styla_magazine_page_slug'] );
 
     ?>
             <div class="updated"><p><strong><?php _e('Options saved.' ); ?></strong></p></div>
