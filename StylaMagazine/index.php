@@ -3,7 +3,7 @@
 Plugin Name: StylaMagazine
 Plugin URI: http://www.styla.com
 Description: The plugin to display the styla magazine. Add "styla_body()" within a php tag in the theme where the magazine should show up. In the Wordpress dashboard is a new Styla Magazine settings page to change the plugin settings.
-Version: 1.2.4
+Version: 1.2.5
 Author: Sebastian Sachtleben, Christian Korndörfer
 Author URI: http://www.styla.com
 */
@@ -30,21 +30,30 @@ function run_styla_magazine_manager() {
 
     $routes = join('|', $smh->getMagazineRoutes());
 
+    $pageSlug = $smh->getTranslatedOption('styla_magazine_page_slug', '');
+    $path = $smh->getTranslatedOption('styla_magazine_path', '');
+
     // Rewriterules for magazine URLs
     if(get_option('styla_magazine_path') != "") {
         /* - if WPML Multilingual CMS is installed, the rewriterule should trigger without the language (e.g. /de/...) in front
          * - the "styla_magazine_page_slug" should be the slug of the page without any path in front
          */
-        if(is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' )) {
-            add_rewrite_rule('^'.get_option('styla_magazine_page_slug').'(\/)('.$routes.')\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+        if($smh->isMultilingual()) {
+            add_rewrite_rule('^'.$pageSlug.'(\/)('.$routes.')\/(.*)','index.php?pagename='.$path,'top');
         }
         else{
-            add_rewrite_rule(get_option('styla_magazine_path').'(\/)('.$routes.')\/(.*)','index.php?pagename='.get_option('styla_magazine_path'),'top');
+            add_rewrite_rule($path.'(\/)('.$routes.')\/(.*)','index.php?pagename='.$path,'top');
         }
     }
     else{
-        add_rewrite_rule('^('.$routes.')\/(.*)','index.php?pagename='.get_option('styla_magazine_page_slug'),'top');
-        add_filter( 'redirect_canonical', 'disable_canonical_redirect_for_front_page' );
+        $lang = apply_filters( 'wpml_current_language', NULL );
+        $magazinePage = get_page_by_path($pageSlug);
+        $translatedPage = get_page(icl_object_id($magazinePage->ID, 'page', true, $lang));
+        #die(get_option( 'page_on_front' ));
+        #die($translatedPage->post_name);
+        #add_rewrite_rule('en\/','index.php?pagename='.$pageSlug,'top');
+        add_rewrite_rule('^('.$routes.')\/(.*)','index.php?page_id='.get_option( 'page_on_front' ),'top');
+        #add_filter( 'redirect_canonical', 'disable_canonical_redirect_for_front_page' );
     }
 
     // fetch seo content early to determine whether or not to show 404
