@@ -48,7 +48,7 @@ You can finde more information on the SEO API on [this page](https://styladocs.a
 
 If you use the [WordPress Multilingual Plugin](https://wpml.org/) to localize content on your website and want to use different magazines for each language, please use your default language Styla domain name within the StylaMagazine plugin settings described in **Configuration/Domain above**. So if your default language is English, it should look like this: 
 
-
+![Styla plugin settings with default magazine](/wordpress-plugin-settings.png)
 
 For other languages, you will need to override this main magazine setting in the WPML plugin itself. In order to do that: 
 * log in to your WP backend
@@ -56,6 +56,7 @@ For other languages, you will need to override this main magazine setting in the
 * select **StylaMagazine** from the drop-down field top of the list
 * set a separate **styla_username** per each language version handled by WPML:
 
+![WPML plugin settings with translations for other magazines](/wordpress-wpml-translation.png)
 
 For example, if your default language is English, then: 
 * `mydomain-en` is set in the plugin settings to be the default,
