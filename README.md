@@ -17,7 +17,9 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 
 5. Add `[php] styla_body(); [/php]` on the page the magazine should be placed
 
-6. Go to **Settings -> Permalinks** and hit the "Save Changes" button (you don't need to change anything on this site) - this will refresh internal redirects for all magazine urls (e.g. <magazine path>/story/asdf-1234)
+6. Go to **Settings -> Permalinks** and hit the **"Save Changes" button** (you don't need to change anything on this site) - this will refresh internal redirects for all magazine urls (e.g. <magazine path>/story/asdf-1234)
+  
+In case routing for the Styla content does not work, please CHECK THE POINT 6. AGAIN. If you don't save this settings, the new routing settings won't kick in. 
 
 ### Configuration
 
@@ -44,9 +46,20 @@ You can finde more information on the SEO API on [this page](https://styladocs.a
 
 ### Using Styla with WPML Plugin
 
-If you use the [WordPress Multilingual Plugin](https://wpml.org/) and want separate magazines for each language please use your main language Styla domain name within the StylaMagazine plugin settings.
+If you use the [WordPress Multilingual Plugin](https://wpml.org/) to localize content on your website and want to use different magazines for each language, please use your default language Styla domain name within the StylaMagazine plugin settings described in **Configuration/Domain above**. So if your default language is English, it should look like this: 
 
-After changing the settings navigate to **WPML -> String Translations** and the StylaMagazine **styla_username** can be translated for each language.
+
+
+For other languages, you will need to override this main magazine setting in the WPML plugin itself. In order to do that: 
+* log in to your WP backend
+* navigate to **WPML -> String Translations** 
+* select **StylaMagazine** from the drop-down field top of the list
+* set a separate **styla_username** per each language version handled by WPML:
+
+
+For example, if your default language is English, then: 
+* `mydomain-en` is set in the plugin settings to be the default,
+* `mydomain-en` is se in WPML String Translations setting to be used only for German language.
 
 ### Changes
 
