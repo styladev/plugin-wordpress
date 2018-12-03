@@ -56,6 +56,8 @@ After changing the settings navigate to **WPML -> String Translations** and the 
 * remove YOAST plugin meta tags
 * replace properly title tag with YOAST plugin
 
+---
+
 #### 1.2.4
 * added pages to rewrites
 * support 404 errors with magazine on startpage
