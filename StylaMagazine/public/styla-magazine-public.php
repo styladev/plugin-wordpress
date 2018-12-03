@@ -55,7 +55,7 @@ class Styla_Magazine_Public {
     /**
      * Replaces the magazine <title> tag
      */
-    public function add_magazine_title() {
+    public function add_magazine_title( $title ) {
         if(Styla_Magazine_Helper::isMagazinePath()) {
             $this->fetch_magazine_content();
 
