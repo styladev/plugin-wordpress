@@ -115,11 +115,30 @@ class Styla_Magazine_Manager {
                 $this->loader->add_filter('wp_title', $public, 'add_magazine_title');
             }
 
+            // Remove existing tags
+            $this->removeExistingHeadTags();
+
             // Add scripts and other SEO information to <head>
             $this->loader->add_action('wp_head', $public, 'add_magazine_head');
 
             // Add <noscript> SEO info to <body>
             $this->loader->add_action('styla_body', $public, 'add_magazine_body');
+        }
+    }
+
+    /**
+     * Checks if the YOAST plugin is enabled and removes the generated head tags.
+     */
+    public function removeExistingHeadTags() {
+        if ( is_plugin_active( 'wordpress-seo/wp-seo.php' ) ) {
+            global $wpseo;
+            if(defined($wpseo)){
+                remove_action('wp_head',array($wpseo,'head'),1);
+            }
+            else {
+              $wp = WPSEO_Frontend::get_instance();
+              remove_action('wp_head',array($wp,'head'),1);
+            }
         }
     }
 
