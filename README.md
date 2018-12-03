@@ -22,7 +22,9 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 ### Configuration
 
 * **Domain** - Domain name of the magazine to embed and provided by Styla. If unclear please contact support@styla.com
-* **Magazine Root Path** - Page slug to your magazine. Example: The slug for mydomain.com/magazine would be "magazine" and can be found on the top of the page edit - ![Page slug in "Quick Edit" form](http://i.imgur.com/vAdGxqk.png). Leave empty if your magazine is supposed to be displayed on your front page (e.g. mydomain.com/)
+* **Magazine Root Path** - Page slug to your magazine. Example: The slug for mydomain.com/magazine would be "magazine" and can be found on the top of the page edit. Leave empty if your magazine is supposed to be displayed on your front page (e.g. mydomain.com/)
+
+![Page slug in "Quick Edit" form](http://i.imgur.com/vAdGxqk.png)
 
 * **SEO Server** - Server used to fetch SEO information for the magazine and it's content. _Should not be changed without double-checking with Styla._
 * **Content Server** - Server providing Styles and Javascript for the magazine and it's content. _Should not be changed without double-checking with Styla._
