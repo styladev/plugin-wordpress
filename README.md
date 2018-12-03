@@ -1,7 +1,7 @@
-## Wordpress Styla Magazine Plugin v1.2.4
+## Wordpress Styla Magazine Plugin v1.2.5
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
-#### Compatibility: Wordpress 4.2.2 - 4.5.X
+#### Compatibility: Wordpress 4.2.2 - 4.9.X
 
 This Wordpress plugin provides the SEO and Routing functionality for a Styla magazine. The first diagram on [this page](https://styladocs.atlassian.net/wiki/spaces/CO/pages/9961481/Technical+Integration) should provide you an overview of what the plugin does and how it exchanges data with Styla.
 
@@ -22,10 +22,7 @@ This Wordpress plugin provides the SEO and Routing functionality for a Styla mag
 ### Configuration
 
 * **Domain** - Domain name of the magazine to embed and provided by Styla. If unclear please contact support@styla.com
-* **Magazine Root Path** - URL path to your magazine. Example: The rooth path for mydomain.com/magazine would be "magazine". Leave empty if your magazine is supposed to be displayed on your front page (e.g. mydomain.com/)
-* **Magazine Page Slug** - Slug of the (front-)page with the `[php] styla_body(); [/php]` snippet on it. Only required when the Magazine Root Path is empty. The page slug can be found in the "Quick Edit" form of the page, see this example:
-
-![Page slug in "Quick Edit" form](http://i.imgur.com/vAdGxqk.png)
+* **Magazine Root Path** - Page slug to your magazine. Example: The slug for mydomain.com/magazine would be "magazine" and can be found on the top of the page edit - ![Page slug in "Quick Edit" form](http://i.imgur.com/vAdGxqk.png). Leave empty if your magazine is supposed to be displayed on your front page (e.g. mydomain.com/)
 
 * **SEO Server** - Server used to fetch SEO information for the magazine and it's content. _Should not be changed without double-checking with Styla._
 * **Content Server** - Server providing Styles and Javascript for the magazine and it's content. _Should not be changed without double-checking with Styla._
@@ -45,9 +42,17 @@ You can finde more information on the SEO API on [this page](https://styladocs.a
 
 ### Using Styla with WPML Plugin
 
-If you use the [WordPress Multilingual Plugin](https://wpml.org/) then please read [this guide](/wpml-plugin.md) to set up Styla magazine(s) on your WordPress website.
+If you use the [WordPress Multilingual Plugin](https://wpml.org/) and want separate magazines for each language please use your main language Styla domain name within the StylaMagazine plugin settings.
+
+After changing the settings navigate to **WPML -> String Translations** and the StylaMagazine **styla_username** can be translated for each language.
 
 ### Changes
+
+#### 1.2.5
+* fixed support for magazine on frontpage
+* support for wpml with separate magazines per language
+* remove YOAST plugin meta tags
+* replace properly title tag with YOAST plugin
 
 #### 1.2.4
 * added pages to rewrites
