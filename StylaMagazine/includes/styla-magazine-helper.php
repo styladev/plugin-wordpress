@@ -27,15 +27,23 @@ class Styla_Magazine_Helper {
             return array();
         }
 
-        $currentPath = $_SERVER["REQUEST_URI"];
-        $magazinePath = get_option('styla_magazine_path', '/');
-        if ($magazinePath != '/') {
-            $currentPath = str_replace('/'.$magazinePath, '', $currentPath);
+        $path = rtrim($_SERVER["REQUEST_URI"], '/');
+        $homeUrl = rtrim(parse_url(apply_filters('wpml_home_url', get_option('home')), PHP_URL_PATH), '/');
+
+        if (substr($path, 0, strlen($homeUrl)) == $homeUrl) {
+            $path = ltrim(substr($path, strlen($homeUrl)), '/');
         }
 
-        $seo = wp_cache_get($currentPath, 'StylaMagazine');
+        $magazinePath = @self::getTranslatedOption('styla_magazine_path', '/');
+        if ($magazinePath != '/') {
+            $path = str_replace('/'.$magazinePath, '', $path);
+        }
+
+        $magazinePath = self::getMagazinePath();
+
+        $seo = wp_cache_get($path, 'StylaMagazine');
         if (!$seo) {
-            $seo = self::fetchAndRememberSEO($currentPath);
+            $seo = self::fetchAndRememberSEO($path);
         }
 
         if(is_object( $seo )){
@@ -56,8 +64,10 @@ class Styla_Magazine_Helper {
      */
     public static function fetch_cdn_content() {
         $version = self::fetchAndRememberCdnVersion();
-        $cdn = '<script async type="text/javascript" src="' . get_option('styla_content_server', 'http://client-scripts.styla.com/') . 'scripts/clients/' . get_option('styla_username') . '.js?v=' . $version . '"></script>' .
-               '<link rel="stylesheet" type="text/css" href="' . get_option('styla_content_server', 'http://client-scripts.styla.com/') . 'styles/clients/' . get_option('styla_username') . '.css?v=' . $version . '">';
+        $serverDomain = get_option('styla_content_server', '//client-scripts.styla.com/');
+        $stylaUsername = @self::getTranslatedOption('styla_username');
+        $cdn = '<script async type="text/javascript" src="' . $serverDomain . 'scripts/clients/' . $stylaUsername . '.js?v=' . $version . '"></script>' .
+               '<link rel="stylesheet" type="text/css" href="' . $serverDomain . 'styles/clients/' . $stylaUsername . '.css?v=' . $version . '">';
         return $cdn;
     }
 
@@ -83,7 +93,7 @@ class Styla_Magazine_Helper {
      * Fetch SEO information for the requested key
      */
     private static function fetchAndRememberSEO( $key ) {
-        $url = get_option('styla_seo_server', 'http://seo.styla.com/clients/').get_option('styla_username', '').'?url='.$key;
+        $url = get_option('styla_seo_server', 'http://seo.styla.com/clients/') . @self::getTranslatedOption('styla_username', '') . '?url='.$key;
         $data = @self::get_content($url);
         if($data != FALSE){
             // JSON decode
@@ -133,7 +143,7 @@ class Styla_Magazine_Helper {
      */
     public static function isMagazinePath() {
         $currentPath = ltrim($_SERVER["REQUEST_URI"], '/');
-        $magazinePath = ltrim(get_option('styla_magazine_path', '/'), '/');
+        $magazinePath = @self::getMagazinePath();
 
         $routes = join('|', @self::getMagazineRoutes());
         $rootRegex = '^' . @self::buildRegexForMagazinePath($magazinePath) . '(\/)?$';
@@ -143,6 +153,16 @@ class Styla_Magazine_Helper {
         $isMatchingRoutes = @self::isMatching($routesRegex, $currentPath);
 
         return $isMatchingRoot || $isMatchingRoutes;
+    }
+
+    public static function getMagazinePath() {
+        $homeUrl = '';
+
+        if (@self::isMultilingual()) {
+            $homeUrl = parse_url(apply_filters('wpml_home_url', get_option('home')), PHP_URL_PATH);
+        }
+
+        return trim($homeUrl . get_option('styla_magazine_path', '/'), '/');
     }
 
     public static function buildRegexForMagazinePath($magazinePath) {
@@ -156,6 +176,14 @@ class Styla_Magazine_Helper {
 
     public static function getMagazineRoutes() {
         return [ 'user', 'tag', 'tags', 'story', 'search', 'category', 'pages' ];
+    }
+
+    public static function getTranslatedOption($key, $defaultValue = '') {
+        return icl_t('StylaMagazine', $key, get_option($key, $defaultValue));
+    }
+
+    public static function isMultilingual() {
+        return is_plugin_active( 'wpml-multilingual-cms/sitepress.php' ) || is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' );
     }
 
 }

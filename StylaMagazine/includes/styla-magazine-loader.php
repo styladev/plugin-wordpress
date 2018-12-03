@@ -5,7 +5,7 @@
 * @author     Sebastian Sachtleben
 */
 class Styla_Magazine_Loader {
- 
+
     /**
      * A reference to the collection of actions used throughout the plugin.
      *
@@ -13,7 +13,7 @@ class Styla_Magazine_Loader {
      * @var    array    $actions    The array of actions that are defined throughout the plugin.
      */
     protected $actions;
- 
+
     /**
      * A reference to the collection of filters used throughout the plugin.
      *
@@ -21,7 +21,7 @@ class Styla_Magazine_Loader {
      * @var    array    $actions    The array of filters that are defined throughout the plugin.
      */
     protected $filters;
- 
+
     /**
      * Instantiates the plugin by setting up the data structures that will
      * be used to maintain the actions and the filters.
@@ -30,7 +30,7 @@ class Styla_Magazine_Loader {
         $this->actions = array();
         $this->filters = array();
     }
- 
+
     /**
      * Registers the actions with WordPress and the respective objects and
      * their methods.
@@ -51,7 +51,7 @@ class Styla_Magazine_Loader {
      * @param  string    $hook        The name of the WordPress hook to which we're registering a callback.
      * @param  object    $component   The object that contains the method to be called when the hook is fired.
      * @param  string    $callback    The function that resides on the specified component.
-     */	
+     */
     public function add_filter( $hook, $component, $callback ) {
         $this->filters = $this->add( $this->filters, $hook, $component, $callback );
     }
@@ -68,7 +68,7 @@ class Styla_Magazine_Loader {
      * @param  string    $callback    The function that resides on the specified component.
      *
      * @return array                  The collection of hooks that are registered with WordPress via this class.
-     */	
+     */
     private function add( $hooks, $hook, $component, $callback ) {
         $hooks[] = array(
             'hook'      => $hook,
@@ -77,7 +77,7 @@ class Styla_Magazine_Loader {
         );
         return $hooks;
     }
- 
+
     /**
      * Registers all of the defined filters and actions with WordPress.
      */
@@ -89,5 +89,5 @@ class Styla_Magazine_Loader {
             add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ) );
         }
     }
- 
+
 }
