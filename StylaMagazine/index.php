@@ -29,21 +29,11 @@ function run_styla_magazine_manager() {
     $smh = new Styla_Magazine_Helper();
 
     $routes = join('|', $smh->getMagazineRoutes());
-
-    $pageSlug = $smh->getTranslatedOption('styla_magazine_page_slug', '');
     $path = $smh->getTranslatedOption('styla_magazine_path', '');
 
     // Rewriterules for magazine URLs
     if(get_option('styla_magazine_path') != "") {
-        /* - if WPML Multilingual CMS is installed, the rewriterule should trigger without the language (e.g. /de/...) in front
-         * - the "styla_magazine_page_slug" should be the slug of the page without any path in front
-         */
-        if($smh->isMultilingual()) {
-            add_rewrite_rule('^'.$pageSlug.'(\/)('.$routes.')\/(.*)','index.php?pagename='.$path,'top');
-        }
-        else{
-            add_rewrite_rule($path.'(\/)('.$routes.')\/(.*)','index.php?pagename='.$path,'top');
-        }
+        add_rewrite_rule($path.'(\/)('.$routes.')\/(.*)','index.php?pagename='.$path,'top');
     }
     else{
         $frontPageId = get_option( 'page_on_front' );

@@ -2,6 +2,5 @@
   <admin-texts>
    <key name="styla_username"/>
    <key name="styla_magazine_path"/>
-   <key name="styla_magazine_page_slug"/>
   </admin-texts>
 </wpml-config>

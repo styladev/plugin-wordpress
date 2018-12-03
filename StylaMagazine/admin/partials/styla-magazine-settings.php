@@ -19,12 +19,6 @@
                 delete_option('styla_magazine_path');
             }
 
-            if ($_POST['styla_magazine_page_slug'] != '') {
-                update_option('styla_magazine_page_slug', $_POST['styla_magazine_page_slug']);
-            } else {
-                delete_option('styla_magazine_page_slug');
-            }
-
             if ($_POST['styla_seo_server'] != '') {
                 update_option('styla_seo_server', $_POST['styla_seo_server']);
             } else {
@@ -66,13 +60,6 @@
                 <td>
                     <input type="text" name="styla_magazine_path" value="<?php echo isset($_POST['styla_magazine_path']) ? $_POST['styla_magazine_path'] : get_option('styla_magazine_path'); ?>" class="regular-text">
                     <p class="description">The magazine root path (e.g. "magazine" for example.com/magazine ; leave empty if the magazine is on your front page; default: "")</p>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><?php _e("Magazine Page Slug" ); ?></th>
-                <td>
-                    <input type="text" name="styla_magazine_page_slug" value="<?php echo isset($_POST['styla_magazine_page_slug']) ? $_POST['styla_magazine_page_slug'] : get_option('styla_magazine_page_slug'); ?>" class="regular-text">
-                    <p class="description">Slug of the magazine page. Only required if magazine is shown on the front page (default: "")</p>
                 </td>
             </tr>
             <tr>

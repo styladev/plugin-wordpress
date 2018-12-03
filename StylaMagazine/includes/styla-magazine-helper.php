@@ -27,8 +27,8 @@ class Styla_Magazine_Helper {
             return array();
         }
 
-        $path = $_SERVER["REQUEST_URI"];
-        $homeUrl = parse_url(apply_filters('wpml_home_url', get_option('home')), PHP_URL_PATH);
+        $path = rtrim($_SERVER["REQUEST_URI"], '/');
+        $homeUrl = rtrim(parse_url(apply_filters('wpml_home_url', get_option('home')), PHP_URL_PATH), '/');
 
         if (substr($path, 0, strlen($homeUrl)) == $homeUrl) {
             $path = ltrim(substr($path, strlen($homeUrl)), '/');
