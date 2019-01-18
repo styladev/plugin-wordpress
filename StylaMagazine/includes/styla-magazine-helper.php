@@ -179,7 +179,8 @@ class Styla_Magazine_Helper {
     }
 
     public static function getTranslatedOption($key, $defaultValue = '') {
-        return icl_t('StylaMagazine', $key, get_option($key, $defaultValue));
+        $optionValue = get_option($key, $defaultValue);
+        return @self::isMultilingual() ? icl_t('StylaMagazine', $key, $optionValue) : $optionValue;
     }
 
     public static function isMultilingual() {
