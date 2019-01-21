@@ -111,7 +111,9 @@ class Styla_Magazine_Helper {
                 // return Status code 404
                 status_header(404);
                 nocache_headers();
-                include( get_query_template( '404' ) );
+                if ( '' != get_query_template( '404' ) ) {
+                    include( get_query_template( '404' ) );
+                }
                 exit();
             }
         }
