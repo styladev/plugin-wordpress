@@ -1,4 +1,4 @@
-## Wordpress Styla Magazine Plugin v1.2.7
+## Wordpress Styla Magazine Plugin v1.2.8
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
 #### Compatibility: Wordpress 4.2.2 - 4.9.X
@@ -63,6 +63,9 @@ For example, if your default language is English, then:
 * `mydomain-en` is se in WPML String Translations setting to be used only for German language.
 
 ### Changes
+
+#### 1.2.8
+* fixed placement of seo html
 
 #### 1.2.7
 * check if 404 template exists before including
