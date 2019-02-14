@@ -95,8 +95,7 @@ class Styla_Magazine_Public {
                 die('Please set the styla magazine username in the settings!');
             }
             if ($this->body !== null) {
-                echo '<div id="stylaMagazine"></div>';
-                echo $this->body;
+                echo '<div id="stylaMagazine">'.$this->body.'</div>';
             }
         }
     }
