@@ -42,7 +42,7 @@ This is done to provide search engine bots with data to crawl and index all Stya
 
 Once you install and configure the module, please open source of the page on which your Styla content is embedded and check if none of the tags mentioned below are duplicated. In case `robots`or `link rel="canonical"` or any other are in the HTML twice, make sure to remove the original ones coming from your default template. Otherwise search engine bots might not be able to crawl all the Styla content or crawl it incorrectly.
 
-You can finde more information on the SEO API on [this page](https://styladocs.atlassian.net/wiki/spaces/CO/pages/9961486/SEO+API+and+Sitemaps+Integration)
+You can find more information on the SEO API on [this page](https://styladocs.atlassian.net/wiki/spaces/CO/pages/9961486/SEO+API+and+Sitemaps+Integration)
 
 ### Using Styla with WPML Plugin
 
@@ -60,7 +60,7 @@ For other languages, you will need to override this main magazine setting in the
 
 For example, if your default language is English, then: 
 * `mydomain-en` is set in the plugin settings to be the default,
-* `mydomain-en` is se in WPML String Translations setting to be used only for German language.
+* `mydomain-de` is set in WPML String Translations setting to be used only for German language.
 
 ### Changes
 
