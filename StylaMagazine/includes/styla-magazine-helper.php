@@ -27,20 +27,7 @@ class Styla_Magazine_Helper {
             return array();
         }
 
-        $path = rtrim($_SERVER["REQUEST_URI"], '/');
-        $homeUrl = rtrim(parse_url(apply_filters('wpml_home_url', get_option('home')), PHP_URL_PATH), '/');
-
-        if (substr($path, 0, strlen($homeUrl)) == $homeUrl) {
-            $path = ltrim(substr($path, strlen($homeUrl)), '/');
-        }
-
-        $magazinePath = @self::getTranslatedOption('styla_magazine_path', '/');
-        if ($magazinePath != '/') {
-            $path = str_replace('/'.$magazinePath, '', $path);
-        }
-
-        $magazinePath = self::getMagazinePath();
-
+        $path = strtok($_SERVER["REQUEST_URI"],'?');
         $seo = wp_cache_get($path, 'StylaMagazine');
         if (!$seo) {
             $seo = self::fetchAndRememberSEO($path);
