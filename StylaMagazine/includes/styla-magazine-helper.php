@@ -27,7 +27,9 @@ class Styla_Magazine_Helper {
             return array();
         }
 
-        $path = strtok($_SERVER["REQUEST_URI"],'?');
+        $arr = parse_url($_SERVER['REQUEST_URI']);
+        $path = $arr['path'];
+
         $seo = wp_cache_get($path, 'StylaMagazine');
         if (!$seo) {
             $seo = self::fetchAndRememberSEO($path);
