@@ -1,4 +1,4 @@
-## Wordpress Styla Magazine Plugin v1.2.8
+## Wordpress Styla Magazine Plugin
 ## Installation How-to
 #### Author: Sebastian Sachtleben, Christian Korndörfer
 #### Compatibility: Wordpress 4.2.2 - 4.9.X
@@ -63,6 +63,10 @@ For example, if your default language is English, then:
 * `mydomain-de` is set in WPML String Translations setting to be used only for German language.
 
 ### Changes
+
+#### 2.0.0
+* The plugin now requests Styla page content from Styla SEO API without base path defined in its settings.
+* If you update your plugin version to this one, please contact Styla to update your client settings on their end. Otherwise Styla content might not work as intended.
 
 #### 1.2.8
 * fixed placement of seo html
