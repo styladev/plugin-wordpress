@@ -3,7 +3,7 @@
 #### Author: Sebastian Sachtleben, Christian Korndörfer
 #### Compatibility: Wordpress 4.2.2 - 4.9.X
 
-This Wordpress plugin provides the SEO and Routing functionality for a Styla magazine. The first diagram on [this page](https://styladocs.atlassian.net/wiki/spaces/CO/pages/9961481/Technical+Integration) should provide you an overview of what the plugin does and how it exchanges data with Styla.
+This Wordpress plugin provides the SEO and Routing functionality for a Styla by embedding Styla content on a specific path. [This documentation page](https://docs.styla.com/) should provide you an overview of how Styla works in general. 
 
 ### Installation
 
